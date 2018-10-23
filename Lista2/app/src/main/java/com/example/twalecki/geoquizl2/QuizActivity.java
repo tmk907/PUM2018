@@ -133,6 +133,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         }
         givenAnswers[mCurrentIndex] = true;
+
         if (AreAllAnswersGiven()){
             ShowResultsNotification();
         }
