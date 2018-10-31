@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">GeoQuizL5</string>
+    <string name="question_stolica_polski">Czy Warszawa jest stolicą Polski?</string>
+    <string name="question_stolica_dolnego_slaska">Czy Opole jest stolicą Dolnego Śląska?</string>
+    <string name="question_sniezka">Czy Śnieżka to najwyższy szczyt Karkonoszy?</string>
+    <string name="question_wisla">Czy Wisła jest najdłuższą rzeką Polski?</string>
+    <string name="channel_name">wyniki</string>
+    <string name="channel_description">Wwyniki quizu</string>
+</resources>
