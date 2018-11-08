@@ -31,6 +31,7 @@ public class QuizActivity extends AppCompatActivity {
     private TextView mPointsTextView;
     private Button mCheatButton;
     private TextView mAPITextView;
+    private Button mQuestionListButton;
 
     private int points;
     private boolean[] givenAnswers;
@@ -75,6 +76,7 @@ public class QuizActivity extends AppCompatActivity {
         mPointsTextView = (TextView) findViewById(R.id.mPointsTextView);
         mPointsTextView.setText(Integer.toString(points));
         mCheatButton = (Button) findViewById((R.id.mCheatButton));
+        mQuestionListButton = (Button) findViewById(R.id.mQuestionListButton);
 
         mAPITextView = (TextView) findViewById(R.id.mApiTextView);
         mAPITextView.setText("Wersja Api: " + Build.VERSION.SDK_INT);
@@ -109,8 +111,15 @@ public class QuizActivity extends AppCompatActivity {
                 StartCheatActivity();
             }
         });
+        mQuestionListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StartQuestionListActivity();
+            }
+        });
 
         points = 0;
+        mQuestionBank = QuestionBank.getInstance();
         givenAnswers = new boolean[mQuestionBank.size()];
         usedCheats = new boolean[mQuestionBank.size()];
         tokensUsed=0;
@@ -250,6 +259,11 @@ public class QuizActivity extends AppCompatActivity {
     private void StartCheatActivity(){
         Intent intent = CheatActivity.newIntent(this, mQuestionBank.getQuestion(mCurrentIndex).isAnswerTrue());
         startActivityForResult(intent, CHEAT_CODE_REQUEST);
+    }
+
+    private void StartQuestionListActivity(){
+        Intent intent = QuestionListActivity.newIntent(this);
+        startActivity(intent);
     }
 
     private void ShowResultsNotification(){
