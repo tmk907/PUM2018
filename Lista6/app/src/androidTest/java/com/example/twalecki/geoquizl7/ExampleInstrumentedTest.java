@@ -1,4 +1,4 @@
-package com.example.twalecki.geoquizl6;
+package com.example.twalecki.geoquizl7;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

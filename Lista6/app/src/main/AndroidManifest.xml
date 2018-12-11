@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.twalecki.geoquizl6">
+    package="com.example.twalecki.geoquizl7">
 
     <application
         android:allowBackup="true"
@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CheatActivity" />
-        <activity android:name=".QuestionListActivity"></activity>
+        <activity android:name=".QuestionListActivity" />
+        <activity android:name=".SummaryActivity"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.twalecki.geoquizl6;
+package com.example.twalecki.geoquizl7;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -243,7 +243,7 @@ public class QuizActivity extends AppCompatActivity {
         }
         givenAnswers[mCurrentIndex] = true;
         if (AreAllAnswersGiven()){
-            ShowResultsNotification();
+            ShowSummaryActivity();
         }
     }
 
@@ -263,6 +263,11 @@ public class QuizActivity extends AppCompatActivity {
 
     private void StartQuestionListActivity(){
         Intent intent = QuestionListActivity.newIntent(this);
+        startActivity(intent);
+    }
+
+    private void ShowSummaryActivity(){
+        Intent intent = SummaryActivity.newIntent(this, points, mQuestionBank.size(), tokensUsed);
         startActivity(intent);
     }
 
