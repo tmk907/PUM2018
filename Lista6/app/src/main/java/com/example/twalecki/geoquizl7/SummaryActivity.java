@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class SummaryActivity extends AppCompatActivity {
@@ -12,9 +14,12 @@ public class SummaryActivity extends AppCompatActivity {
     private TextView mNumberOfQuestionsTextView;
     private TextView mTokenUsedTextView;
 
+    private Button mShareButton;
+
     private final static String POINTS_MESSAGE = "POINTS_MESSAGE";
     private final static String NUMBER_QUESTIONS_MESSAGE = "NUMBER_QUESTIONS_MESSAGE";
     private final static String TOKEN_USED_MESSAGE = "TOKEN_USED_MESSAGE";
+
 
 
     @Override
@@ -29,6 +34,18 @@ public class SummaryActivity extends AppCompatActivity {
         mPointsTextView.setText(Integer.toString(getIntent().getIntExtra(POINTS_MESSAGE, 0)));
         mNumberOfQuestionsTextView.setText(Integer.toString(getIntent().getIntExtra(NUMBER_QUESTIONS_MESSAGE, 0)));
         mTokenUsedTextView.setText(Integer.toString(getIntent().getIntExtra(TOKEN_USED_MESSAGE, 0)));
+
+        mShareButton = (Button) findViewById(R.id.mShareButton);
+        mShareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShareResult();
+            }
+        });
+
+    }
+
+    private void ShareResult(){
 
     }
 
