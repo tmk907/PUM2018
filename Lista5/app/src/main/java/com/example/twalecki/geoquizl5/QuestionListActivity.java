@@ -33,8 +33,7 @@ public class QuestionListActivity extends AppCompatActivity {
     }
 
     private void updateList(){
-        QuestionDataSource dataSource = QuestionDataSource.get(this);
-        mAdapter = new QuestionAdapter(dataSource.getQuestions());
+        mAdapter = new QuestionAdapter(QuestionBank.getInstance().getQuestions());
         mRecyclerView.setAdapter(mAdapter);
     }
 

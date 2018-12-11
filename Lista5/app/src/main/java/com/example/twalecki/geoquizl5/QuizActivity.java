@@ -73,8 +73,8 @@ public class QuizActivity extends AppCompatActivity {
                 showNextQuestion();
             }
         });
-        mPointsTextView = (TextView) findViewById(R.id.mPointsTextView);
-        mPointsTextView.setText(Integer.toString(points));
+//        mPointsTextView = (TextView) findViewById(R.id.mPointsTextView);
+//        mPointsTextView.setText(Integer.toString(points));
         mCheatButton = (Button) findViewById((R.id.mCheatButton));
         mQuestionListButton = (Button) findViewById(R.id.mQuestionListButton);
 
@@ -143,7 +143,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private void updateQuestion(){
         Log.d(TAG,"updateQuestion");
-        mPointsTextView.setText(Integer.toString(points));
+//        mPointsTextView.setText(Integer.toString(points));
         mQuestionTextView.setText(mQuestionBank.getQuestion(mCurrentIndex).getTextResId());
         if(givenAnswers[mCurrentIndex]){
             disableButtons();
@@ -235,7 +235,7 @@ public class QuizActivity extends AppCompatActivity {
         if (!isAnswerGiven) {
             if (mQuestionBank.getQuestion(mCurrentIndex).isAnswerTrue() == userPressedTrue) {
                 points++;
-                mPointsTextView.setText(Integer.toString(points));
+//                mPointsTextView.setText(Integer.toString(points));
                 toastTrue.show();
             } else {
                 toastFalse.show();

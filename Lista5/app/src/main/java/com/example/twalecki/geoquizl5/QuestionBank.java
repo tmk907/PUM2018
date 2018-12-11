@@ -12,13 +12,15 @@ public class QuestionBank {
         questions.add(new Question(R.string.question_wisla, true));
     }
 
-    public static QuestionBank getInstance() {
-        return SingletonHolder.INSTANCE;
+    private static QuestionBank instance;
+
+    public static QuestionBank getInstance(){
+        if (instance == null){
+            instance = new QuestionBank();
+        }
+        return instance;
     }
 
-    private static class SingletonHolder {
-        private static final QuestionBank INSTANCE = new QuestionBank();
-    }
 
     private List<Question> questions;
 
