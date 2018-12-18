@@ -2,19 +2,27 @@ package com.example.twalecki.geoquizl7;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class SummaryActivity extends AppCompatActivity {
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private TextView mPointsTextView;
     private TextView mNumberOfQuestionsTextView;
     private TextView mTokenUsedTextView;
 
     private Button mShareButton;
+    private Button mTakePictureButton;
+
+    private ImageView mImageView;
 
     private final static String POINTS_MESSAGE = "POINTS_MESSAGE";
     private final static String NUMBER_QUESTIONS_MESSAGE = "NUMBER_QUESTIONS_MESSAGE";
@@ -43,10 +51,48 @@ public class SummaryActivity extends AppCompatActivity {
             }
         });
 
+        mTakePictureButton = (Button) findViewById(R.id.takePictureButton);
+        mTakePictureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TakePicture();
+            }
+        });
+
+        mImageView = (ImageView) findViewById(R.id.image_view);
     }
 
-    private void ShareResult(){
+    @Override
+    public boolean onSupportNavigateUp() {
+        startActivity(new Intent(this, QuestionListActivity.class));
+        finish();
+        return true;
+    }
 
+
+    private void ShareResult(){
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "W GeoQuiz zdobyłem " + mPointsTextView.getText() + " pkt!");
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
+    }
+
+
+    private void TakePicture(){
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            mImageView.setImageBitmap(imageBitmap);
+            mImageView.setVisibility(1);
+        }
     }
 
     public static Intent newIntent(Context packageContext, int points, int numberOfQuestions, int tokenUsed){
