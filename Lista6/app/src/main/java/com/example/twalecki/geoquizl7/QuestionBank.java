@@ -6,10 +6,10 @@ import java.util.List;
 public class QuestionBank {
     private QuestionBank() {
         questions = new ArrayList<Question>();
-        questions.add(new Question(R.string.question_stolica_polski, true));
-        questions.add(new Question(R.string.question_stolica_dolnego_slaska, false));
-        questions.add(new Question(R.string.question_sniezka, true));
-        questions.add(new Question(R.string.question_wisla, true));
+        questions.add(new Question("Czy Warszawa jest stolicą Polski?", true));
+        questions.add(new Question("Czy Opole jest stolicą Dolnego Śląska?", false));
+        questions.add(new Question("Czy Śnieżka to najwyższy szczyt Karkonoszy?", true));
+        questions.add(new Question("Czy Wisła jest najdłuższą rzeką Polski?", true));
     }
 
     private static QuestionBank instance;

@@ -7,12 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -24,15 +27,20 @@ public class QuestionListActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private QuestionAdapter mAdapter;
 
+    private QuestionDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_list);
 
+        db = new QuestionDatabase(new GeoQuizDbHelper(this));
+
         mRecyclerView = (RecyclerView) findViewById(R.id.questionsRecyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         updateList();
+        //registerForContextMenu(mRecyclerView);
     }
 
     @Override
@@ -58,8 +66,29 @@ public class QuestionListActivity extends AppCompatActivity {
         }
     }
 
-    private void AddNewQuestion(){
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.context_menu, menu);
+        menu.setHeaderTitle("Select The Action");
+    }
 
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case R.id.mEditText:
+
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+    private void AddNewQuestion(){
+        Intent intent = EditQuestionActivity.newIntent(this,-1,"",false);
+        startActivity(intent);
     }
 
     private void QuitApp(){
@@ -67,7 +96,7 @@ public class QuestionListActivity extends AppCompatActivity {
     }
 
     private void updateList(){
-        mAdapter = new QuestionAdapter(QuestionBank.getInstance().getQuestions());
+        mAdapter = new QuestionAdapter(db.GetAllQuestions());
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -89,7 +118,7 @@ public class QuestionListActivity extends AppCompatActivity {
 
         public void bind(Question question) {
             mQuestion = question;
-            mTitleTextView.setText(mQuestion.getTextResId());
+            mTitleTextView.setText(mQuestion.getQuestion());
         }
     }
 

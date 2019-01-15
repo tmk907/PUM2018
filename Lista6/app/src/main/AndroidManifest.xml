@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.twalecki.geoquizl7">
 
-    <uses-feature android:name="android.hardware.camera2"
-        android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.camera2"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -21,9 +22,10 @@
         </activity>
         <activity android:name=".CheatActivity" />
         <activity android:name=".QuestionListActivity" />
-        <activity android:name=".SummaryActivity"
-            android:parentActivityName=".QuestionListActivity"/>
-
+        <activity
+            android:name=".SummaryActivity"
+            android:parentActivityName=".QuestionListActivity" />
+        <activity android:name=".EditQuestionActivity"></activity>
     </application>
 
 </manifest>

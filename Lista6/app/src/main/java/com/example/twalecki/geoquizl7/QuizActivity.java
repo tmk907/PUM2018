@@ -22,6 +22,8 @@ public class QuizActivity extends AppCompatActivity {
 
     private int mCurrentIndex;
     private QuestionBank mQuestionBank;
+    private QuestionDatabase db;
+
 
     private Button mTrueButton;
     private Button mFalseButton;
@@ -119,6 +121,7 @@ public class QuizActivity extends AppCompatActivity {
         });
 
         points = 0;
+        db = new QuestionDatabase(new GeoQuizDbHelper(this));
         mQuestionBank = QuestionBank.getInstance();
         givenAnswers = new boolean[mQuestionBank.size()];
         usedCheats = new boolean[mQuestionBank.size()];
@@ -144,7 +147,7 @@ public class QuizActivity extends AppCompatActivity {
     private void updateQuestion(){
         Log.d(TAG,"updateQuestion");
 //        mPointsTextView.setText(Integer.toString(points));
-        mQuestionTextView.setText(mQuestionBank.getQuestion(mCurrentIndex).getTextResId());
+        mQuestionTextView.setText(mQuestionBank.getQuestion(mCurrentIndex).getQuestion());
         if(givenAnswers[mCurrentIndex]){
             disableButtons();
         }
